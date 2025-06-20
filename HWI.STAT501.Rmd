@@ -8,11 +8,281 @@ output:
 ---
 
 ```{r message=FALSE}
-#diamond<-file.choose() ## This method works better if the original data has no header row, and then you will need to add the variable names manually. 
+# Load Data
 
-diamond<-read.table("U:/data/diamonds.csv", header =TRUE, sep=",")
-dim(diamond) 
-class(diamond$weight)
-class(diamond$price)
-summary(diamond)
+# Load necessary libraries
+library(readr)
+library(dplyr)
+
+# Load the data
+senic <- read.csv("~/Desktop/MY Purdue/Summer 2025/STATS/Scripts/senic.csv")
+
+# Preview the data
+head(senic)
+
+# View the structure of your dataset
+str(senic)
+
 ```
+
+
+```{r}
+#Define Variables
+
+# Assign variables
+X <- senic$infection    # Independent Variable: Risk of Infection
+Y <- senic$length  # Dependent Variable: the time it takes or duration
+
+# Check for missing values
+sum(is.na(X)); sum(is.na(Y))
+```
+
+```{r}
+# Part 1: Compute Regression Coefficients Step by Step
+
+# Step 1: Compute means
+X_bar <- mean(X)
+Y_bar <- mean(Y)
+
+
+# Step 2: Compute b1 (slope)
+numerator <- sum((X - X_bar) * (Y - Y_bar))
+denominator <- sum((X - X_bar)^2)
+b1 <- numerator / denominator
+
+# Step 3: Compute b0 (intercept)
+b0 <- Y_bar - b1 * X_bar
+
+
+# Step 4: Compute fitted values and residuals
+Y_hat <- b0 + b1 * X
+residuals <- Y - Y_hat
+
+
+# Step 5: Compute SSE, MSE, SST, SSR
+SSE <- sum(residuals^2)
+MSE <- SSE / (length(Y) - 2)
+SST <- sum((Y - Y_bar)^2)
+SSR <- sum((Y_hat - Y_bar)^2)
+
+# Step 6: Verify decomposition
+SST_check <- SSR + SSE
+```
+
+```{r}
+# Predicted values and residuals
+Y_hat <- b0 + b1 * X
+residuals <- Y - Y_hat
+
+# Sum of Squares
+SSE <- sum(residuals^2)
+SST <- sum((Y - Y_bar)^2)
+SSR <- sum((Y_hat - Y_bar)^2)
+
+# Mean Squared Error
+n <- length(Y)
+df <- n - 2
+MSE <- SSE / df
+
+# show results
+SSE; SST; SSR
+MSE
+```
+
+```{r}
+# double check if SST = SSR + SSE
+all.equal(SST, SSR + SSE)
+```
+
+
+```{r}
+# Output results
+list(
+  X_bar = X_bar,
+  Y_bar = Y_bar,
+  sum_xy_dev = numerator,
+  sum_x_dev_sq = denominator,
+  b1 = b1,
+  b0 = b0,
+  SSE = SSE,
+  MSE = MSE,
+  SST = SST,
+  SSR = SSR,
+  SST_equals_SSR_plus_SSE = all.equal(SST, SSR + SSE)
+)
+```
+
+
+
+
+# I already have:
+
+    b1b1​: the slope
+
+    SSE: sum of squared errors
+
+    MSE: mean squared error
+
+    ∑(Xi−Xˉ)2∑(Xi​−Xˉ)2: the denominator used in slope calculation
+    
+    
+# Question 2:
+
+(8) In order to estimate the linear impact of X on Y, at a confidence of (1-α)%, you should use the critical value, or the t value denoted as t(___, ____), which has a value of ____ (use basic R function or Excel for the exact value), at α=0.1, and _____at α=0.05. The standard error of the estimation  s{b_1 }= _______________(formula)=________(value). The margin error, or t*SE, of the confidence interval is _________ at α=0.1, and _____at α=0.05.
+
+# Solution
+
+```{r}
+# Degrees of freedom
+n <- length(Y)
+df <- n - 2
+
+# Critical t-values
+t_90 <- qt(1 - 0.1/2, df)   # α = 0.1, two-tailed
+t_95 <- qt(1 - 0.05/2, df)  # α = 0.05, two-tailed
+
+# Standard error of b1
+SE_b1 <- sqrt(MSE / sum((X - X_bar)^2))
+
+# Margin of error
+ME_90 <- t_90 * SE_b1
+ME_95 <- t_95 * SE_b1
+
+# Output answers
+list(
+  df = df,
+  t_90 = t_90,
+  t_95 = t_95,
+  SE_b1 = SE_b1,
+  ME_90 = ME_90,
+  ME_95 = ME_95
+)
+```
+
+
+# Question 3
+
+10) perform a hypothesis test on the linear impact of X on Y, with a T test with a significant value of 0.1. 
+Note:
+	if a question doesn’t specify the hypothesized value, it is two-sided test against 0.
+	All hypothesis problem should include the following component: Ho/Ha defined in symbols (β,μ etc.), test statistic (notation and formulas), reject region defined on a critical value (p-value computed on a probability formula), and conclusion.  
+
+
+# Define Hypotheses
+H0:β1=0 
+HA:β1≠0
+
+
+# R Code to Compute t-Statistic and p-value
+
+
+```{r}
+# Given values
+b1 <- 0.305
+SE_b1 <- 0.0871
+n <- 113
+
+# Degrees of freedom
+df <- n - 2
+
+# Test statistic
+t_stat <- b1 / SE_b1
+
+# Two-tailed p-value
+p_value <- 2 * pt(-abs(t_stat), df)
+
+# Critical t-value at alpha = 0.1 (two-tailed test)
+t_crit <- qt(1 - 0.1/2, df)
+
+# Conclusion
+reject_H0 <- abs(t_stat) > t_crit
+
+# Output
+cat("Test Statistic (t):", t_stat, "\n")
+cat("Degrees of Freedom:", df, "\n")
+cat("p-value:", p_value, "\n")
+cat("Critical t-value (alpha = 0.1):", t_crit, "\n")
+
+if (reject_H0) {
+  cat("Conclusion: Reject the null hypothesis. There is a significant linear relationship.\n")
+} else {
+  cat("Conclusion: Fail to reject the null hypothesis. No significant relationship found.\n")
+}
+```
+
+# Defion of terms for the question 3
+
+Output Explanation
+
+    t_stat — your test statistic.
+
+    p_value — tells how likely your observed value is under the null.
+
+    t_crit — cutoff point for rejecting H₀ at α = 0.1.
+
+    reject_H0 — TRUE if the result is statistically significant.
+    
+    
+    
+# Question 4: Using R to compute and interpret questions using the simple linear regression (SLR) model:
+
+# Definition of terms 
+
+    Y = length (length of stay)
+
+    X = infection (infection risk)
+
+
+```{r}
+
+# Load data
+senic <- read.csv("/Users/kwabenabayity/Desktop/MY Purdue/Summer 2025/STATS/Scripts/senic.csv")
+
+# Build simple linear regression model
+model <- lm(length ~ infection, data = senic)
+
+# View summary of the model
+summary(model)
+```
+```{r}
+# a) Standard Error of the Point Estimate (s{b₁}) (the SE of the slope coefficient (infection → length))
+
+# Extracting SE of slope (infection)
+summary(model)$coefficients["infection", "Std. Error"]
+
+# b) Residual Standard Error (RSE) (THis shows the average distance between the observed and predicted Y values.)
+
+# Residual Standard Error
+summary(model)$sigma
+
+# c) Degrees of Freedom of the Residual (df_resid)
+
+# Residual degrees of freedom
+summary(model)$df[2]
+
+
+# d) Mean Square Error (MSE) (MSE = SSE / df = RSE²)
+
+# Compute MSE
+RSE <- summary(model)$sigma
+df_resid <- summary(model)$df[2]
+MSE <- RSE^2
+MSE
+
+
+# e) Standard Deviation of Y (s_y)
+
+# Standard deviation of Y (length of stay)
+s_y <- sd(senic$length)
+s_y
+
+
+# computing SST
+
+# Total Sum of Squares (SST)
+n <- nrow(senic)
+SST <- (n - 1) * s_y^2
+SST
+```
+
+
