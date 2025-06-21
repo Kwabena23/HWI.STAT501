@@ -1,0 +1,664 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={HW1},
+  pdfauthor={Kwabena Bayity},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{HW1}
+\author{Kwabena Bayity}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load necessary libraries}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(latexpdf)}
+
+\CommentTok{\# Load the data}
+\NormalTok{senic }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"\textasciitilde{}/Desktop/MY Purdue/Summer 2025/STATS/Scripts/senic.csv"}\NormalTok{)}
+
+\CommentTok{\# Preview the data}
+\FunctionTok{head}\NormalTok{(senic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   id length  age infection cultur  xray bed affiliat region region_recode
+## 1  1   7.13 55.7       4.1    9.0  39.6 279        2      4             4
+## 2  2   8.82 58.2       1.6    3.8  51.7  80        2      2             1
+## 3  3   8.34 56.9       2.7    8.1  74.0 107        2      3             3
+## 4  4   8.95 53.7       5.6   18.9 122.8 147        2      4             4
+## 5  5  11.20 56.5       5.7   34.5  88.9 180        2      1             2
+## 6  6   9.76 50.9       5.1   21.9  97.0 150        2      2             1
+##   patient nurse facility
+## 1     207   241       60
+## 2      51    52       40
+## 3      82    54       20
+## 4      53   148       40
+## 5     134   151       40
+## 6     147   106       40
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# View the structure of your dataset}
+\FunctionTok{str}\NormalTok{(senic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    113 obs. of  13 variables:
+##  $ id           : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ length       : num  7.13 8.82 8.34 8.95 11.2 ...
+##  $ age          : num  55.7 58.2 56.9 53.7 56.5 50.9 57.8 45.7 48.2 56.3 ...
+##  $ infection    : num  4.1 1.6 2.7 5.6 5.7 5.1 4.6 5.4 4.3 6.3 ...
+##  $ cultur       : num  9 3.8 8.1 18.9 34.5 21.9 16.7 60.5 24.4 29.6 ...
+##  $ xray         : num  39.6 51.7 74 122.8 88.9 ...
+##  $ bed          : int  279 80 107 147 180 150 186 640 182 85 ...
+##  $ affiliat     : int  2 2 2 2 2 2 2 1 2 2 ...
+##  $ region       : int  4 2 3 4 1 2 3 2 3 1 ...
+##  $ region_recode: int  4 1 3 4 2 1 3 1 3 2 ...
+##  $ patient      : int  207 51 82 53 134 147 151 399 130 59 ...
+##  $ nurse        : int  241 52 54 148 151 106 129 360 118 66 ...
+##  $ facility     : num  60 40 20 40 40 40 40 60 40 40 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Define Variables}
+
+\CommentTok{\# Assign variables}
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ senic}\SpecialCharTok{$}\NormalTok{infection    }\CommentTok{\# Independent Variable: Risk of Infection}
+\NormalTok{Y }\OtherTok{\textless{}{-}}\NormalTok{ senic}\SpecialCharTok{$}\NormalTok{length  }\CommentTok{\# Dependent Variable: the time it takes or duration}
+
+\CommentTok{\# Check for missing values}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(X)); }\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(Y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Part 1: Compute Regression Coefficients Step by Step}
+
+\CommentTok{\# Step 1: Compute means}
+\NormalTok{X\_bar }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(X)}
+\NormalTok{Y\_bar }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Y)}
+
+
+\CommentTok{\# Step 2: Compute b1 (slope)}
+\NormalTok{numerator }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((X }\SpecialCharTok{{-}}\NormalTok{ X\_bar) }\SpecialCharTok{*}\NormalTok{ (Y }\SpecialCharTok{{-}}\NormalTok{ Y\_bar))}
+\NormalTok{denominator }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((X }\SpecialCharTok{{-}}\NormalTok{ X\_bar)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{b1 }\OtherTok{\textless{}{-}}\NormalTok{ numerator }\SpecialCharTok{/}\NormalTok{ denominator}
+
+\CommentTok{\# Step 3: Compute b0 (intercept)}
+\NormalTok{b0 }\OtherTok{\textless{}{-}}\NormalTok{ Y\_bar }\SpecialCharTok{{-}}\NormalTok{ b1 }\SpecialCharTok{*}\NormalTok{ X\_bar}
+
+
+\CommentTok{\# Step 4: Compute fitted values and residuals}
+\NormalTok{Y\_hat }\OtherTok{\textless{}{-}}\NormalTok{ b0 }\SpecialCharTok{+}\NormalTok{ b1 }\SpecialCharTok{*}\NormalTok{ X}
+\NormalTok{residuals }\OtherTok{\textless{}{-}}\NormalTok{ Y }\SpecialCharTok{{-}}\NormalTok{ Y\_hat}
+
+
+\CommentTok{\# Step 5: Compute SSE, MSE, SST, SSR}
+\NormalTok{SSE }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(residuals}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{MSE }\OtherTok{\textless{}{-}}\NormalTok{ SSE }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{length}\NormalTok{(Y) }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{)}
+\NormalTok{SST }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((Y }\SpecialCharTok{{-}}\NormalTok{ Y\_bar)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{SSR }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((Y\_hat }\SpecialCharTok{{-}}\NormalTok{ Y\_bar)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Step 6: Verify decomposition}
+\NormalTok{SST\_check }\OtherTok{\textless{}{-}}\NormalTok{ SSR }\SpecialCharTok{+}\NormalTok{ SSE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Predicted values and residuals}
+\NormalTok{Y\_hat }\OtherTok{\textless{}{-}}\NormalTok{ b0 }\SpecialCharTok{+}\NormalTok{ b1 }\SpecialCharTok{*}\NormalTok{ X}
+\NormalTok{residuals }\OtherTok{\textless{}{-}}\NormalTok{ Y }\SpecialCharTok{{-}}\NormalTok{ Y\_hat}
+
+\CommentTok{\# Sum of Squares}
+\NormalTok{SSE }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(residuals}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{SST }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((Y }\SpecialCharTok{{-}}\NormalTok{ Y\_bar)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{SSR }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((Y\_hat }\SpecialCharTok{{-}}\NormalTok{ Y\_bar)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Mean Squared Error}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(Y)}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{{-}} \DecValTok{2}
+\NormalTok{MSE }\OtherTok{\textless{}{-}}\NormalTok{ SSE }\SpecialCharTok{/}\NormalTok{ df}
+
+\CommentTok{\# show results}
+\NormalTok{SSE; SST; SSR}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 292.7645
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 409.2104
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 116.4459
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MSE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.637518
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# double check if SST = SSR + SSE}
+\FunctionTok{all.equal}\NormalTok{(SST, SSR }\SpecialCharTok{+}\NormalTok{ SSE)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Output results}
+\FunctionTok{list}\NormalTok{(}
+  \AttributeTok{X\_bar =}\NormalTok{ X\_bar,}
+  \AttributeTok{Y\_bar =}\NormalTok{ Y\_bar,}
+  \AttributeTok{sum\_xy\_dev =}\NormalTok{ numerator,}
+  \AttributeTok{sum\_x\_dev\_sq =}\NormalTok{ denominator,}
+  \AttributeTok{b1 =}\NormalTok{ b1,}
+  \AttributeTok{b0 =}\NormalTok{ b0,}
+  \AttributeTok{SSE =}\NormalTok{ SSE,}
+  \AttributeTok{MSE =}\NormalTok{ MSE,}
+  \AttributeTok{SST =}\NormalTok{ SST,}
+  \AttributeTok{SSR =}\NormalTok{ SSR,}
+  \AttributeTok{SST\_equals\_SSR\_plus\_SSE =} \FunctionTok{all.equal}\NormalTok{(SST, SSR }\SpecialCharTok{+}\NormalTok{ SSE)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $X_bar
+## [1] 4.354867
+## 
+## $Y_bar
+## [1] 9.648319
+## 
+## $sum_xy_dev
+## [1] 153.1334
+## 
+## $sum_x_dev_sq
+## [1] 201.3798
+## 
+## $b1
+## [1] 0.7604209
+## 
+## $b0
+## [1] 6.336787
+## 
+## $SSE
+## [1] 292.7645
+## 
+## $MSE
+## [1] 2.637518
+## 
+## $SST
+## [1] 409.2104
+## 
+## $SSR
+## [1] 116.4459
+## 
+## $SST_equals_SSR_plus_SSE
+## [1] TRUE
+\end{verbatim}
+
+\section{I already have:}\label{i-already-have}
+
+\begin{verbatim}
+b1b1​: the slope
+
+SSE: sum of squared errors
+
+MSE: mean squared error
+
+∑(Xi−Xˉ)2∑(Xi​−Xˉ)2: the denominator used in slope calculation
+\end{verbatim}
+
+\section{Question 2:}\label{question-2}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  In order to estimate the linear impact of X on Y, at a confidence of
+  (1-α)\%, you should use the critical value, or the t value denoted as
+  t(\textbf{\emph{, }}\_), which has a value of \_\_\_\_ (use basic R
+  function or Excel for the exact value), at α=0.1, and \_\_\_\_\_at
+  α=0.05. The standard error of the estimation s\{b\_1 \}=
+  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_(formula)=\_\_\_\_\_\_\_\_(value). The
+  margin error, or t*SE, of the confidence interval is
+  \_\_\_\_\_\_\_\_\_ at α=0.1, and \_\_\_\_\_at α=0.05.
+\end{enumerate}
+
+\section{Solution}\label{solution}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Degrees of freedom}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(Y)}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{{-}} \DecValTok{2}
+
+\CommentTok{\# Critical t{-}values}
+\NormalTok{t\_90 }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \FloatTok{0.1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, df)   }\CommentTok{\# α = 0.1, two{-}tailed}
+\NormalTok{t\_95 }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \FloatTok{0.05}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, df)  }\CommentTok{\# α = 0.05, two{-}tailed}
+
+\CommentTok{\# Standard error of b1}
+\NormalTok{SE\_b1 }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(MSE }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{((X }\SpecialCharTok{{-}}\NormalTok{ X\_bar)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))}
+
+\CommentTok{\# Margin of error}
+\NormalTok{ME\_90 }\OtherTok{\textless{}{-}}\NormalTok{ t\_90 }\SpecialCharTok{*}\NormalTok{ SE\_b1}
+\NormalTok{ME\_95 }\OtherTok{\textless{}{-}}\NormalTok{ t\_95 }\SpecialCharTok{*}\NormalTok{ SE\_b1}
+
+\CommentTok{\# Output answers}
+\FunctionTok{list}\NormalTok{(}
+  \AttributeTok{df =}\NormalTok{ df,}
+  \AttributeTok{t\_90 =}\NormalTok{ t\_90,}
+  \AttributeTok{t\_95 =}\NormalTok{ t\_95,}
+  \AttributeTok{SE\_b1 =}\NormalTok{ SE\_b1,}
+  \AttributeTok{ME\_90 =}\NormalTok{ ME\_90,}
+  \AttributeTok{ME\_95 =}\NormalTok{ ME\_95}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $df
+## [1] 111
+## 
+## $t_90
+## [1] 1.658697
+## 
+## $t_95
+## [1] 1.981567
+## 
+## $SE_b1
+## [1] 0.1144431
+## 
+## $ME_90
+## [1] 0.1898265
+## 
+## $ME_95
+## [1] 0.2267767
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Question 3: }
+\end{Highlighting}
+\end{Shaded}
+
+\section{Question 3}\label{question-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  perform a hypothesis test on the linear impact of X on Y, with a T
+  test with a significant value of 0.1. Note: if a question doesn't
+  specify the hypothesized value, it is two-sided test against 0. All
+  hypothesis problem should include the following component: Ho/Ha
+  defined in symbols (β,μ etc.), test statistic (notation and formulas),
+  reject region defined on a critical value (p-value computed on a
+  probability formula), and conclusion.
+\end{enumerate}
+
+\section{Define Hypotheses}\label{define-hypotheses}
+
+H0:β1=0 HA:β1≠0
+
+\section{R Code to Compute t-Statistic and
+p-value}\label{r-code-to-compute-t-statistic-and-p-value}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Given values}
+\NormalTok{b1 }\OtherTok{\textless{}{-}} \FloatTok{0.305}
+\NormalTok{SE\_b1 }\OtherTok{\textless{}{-}} \FloatTok{0.0871}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{113}
+
+\CommentTok{\# Degrees of freedom}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{{-}} \DecValTok{2}
+
+\CommentTok{\# Test statistic}
+\NormalTok{t\_stat }\OtherTok{\textless{}{-}}\NormalTok{ b1 }\SpecialCharTok{/}\NormalTok{ SE\_b1}
+
+\CommentTok{\# Two{-}tailed p{-}value}
+\NormalTok{p\_value }\OtherTok{\textless{}{-}} \DecValTok{2} \SpecialCharTok{*} \FunctionTok{pt}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{abs}\NormalTok{(t\_stat), df)}
+
+\CommentTok{\# Critical t{-}value at alpha = 0.1 (two{-}tailed test)}
+\NormalTok{t\_crit }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \FloatTok{0.1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, df)}
+
+\CommentTok{\# Conclusion}
+\NormalTok{reject\_H0 }\OtherTok{\textless{}{-}} \FunctionTok{abs}\NormalTok{(t\_stat) }\SpecialCharTok{\textgreater{}}\NormalTok{ t\_crit}
+
+\CommentTok{\# Output}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Test Statistic (t):"}\NormalTok{, t\_stat, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Test Statistic (t): 3.501722
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Degrees of Freedom:"}\NormalTok{, df, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Degrees of Freedom: 111
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"p{-}value:"}\NormalTok{, p\_value, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## p-value: 0.0006669952
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Critical t{-}value (alpha = 0.1):"}\NormalTok{, t\_crit, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Critical t-value (alpha = 0.1): 1.658697
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (reject\_H0) \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Conclusion: Reject the null hypothesis. There is a significant linear relationship.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Conclusion: Fail to reject the null hypothesis. No significant relationship found.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Conclusion: Reject the null hypothesis. There is a significant linear relationship.
+\end{verbatim}
+
+\section{Defion of terms for the question
+3}\label{defion-of-terms-for-the-question-3}
+
+Output Explanation
+
+\begin{verbatim}
+t_stat — your test statistic.
+
+p_value — tells how likely your observed value is under the null.
+
+t_crit — cutoff point for rejecting H₀ at α = 0.1.
+
+reject_H0 — TRUE if the result is statistically significant.
+\end{verbatim}
+
+\section{Question 4: Using R to compute and interpret questions using
+the simple linear regression (SLR)
+model:}\label{question-4-using-r-to-compute-and-interpret-questions-using-the-simple-linear-regression-slr-model}
+
+\section{Definition of terms}\label{definition-of-terms}
+
+\begin{verbatim}
+Y = length (length of stay)
+
+X = infection (infection risk)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Question 4 \# Load data}
+\NormalTok{senic }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"/Users/kwabenabayity/Desktop/MY Purdue/Summer 2025/STATS/Scripts/senic.csv"}\NormalTok{)}
+
+\CommentTok{\# Build simple linear regression model}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ infection, }\AttributeTok{data =}\NormalTok{ senic)}
+
+\CommentTok{\# View summary of the model}
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = length ~ infection, data = senic)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0587 -0.7776 -0.1487  0.7159  8.2805 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   6.3368     0.5213  12.156  < 2e-16 ***
+## infection     0.7604     0.1144   6.645 1.18e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.624 on 111 degrees of freedom
+## Multiple R-squared:  0.2846, Adjusted R-squared:  0.2781 
+## F-statistic: 44.15 on 1 and 111 DF,  p-value: 1.177e-09
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# a) Standard Error of the Point Estimate (s\{b₁\}) (the SE of the slope coefficient (infection → length))}
+
+\CommentTok{\# Extracting SE of slope (infection)}
+\FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{coefficients[}\StringTok{"infection"}\NormalTok{, }\StringTok{"Std. Error"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1144431
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# b) Residual Standard Error (RSE) (THis shows the average distance between the observed and predicted Y values.)}
+
+\CommentTok{\# Residual Standard Error}
+\FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{sigma}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.624044
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# c) Degrees of Freedom of the Residual (df\_resid)}
+
+\CommentTok{\# Residual degrees of freedom}
+\FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{df[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 111
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# d) Mean Square Error (MSE) (MSE = SSE / df = RSE²)}
+
+\CommentTok{\# Compute MSE}
+\NormalTok{RSE }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{sigma}
+\NormalTok{df\_resid }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{df[}\DecValTok{2}\NormalTok{]}
+\NormalTok{MSE }\OtherTok{\textless{}{-}}\NormalTok{ RSE}\SpecialCharTok{\^{}}\DecValTok{2}
+\NormalTok{MSE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.637518
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# e) Standard Deviation of Y (s\_y)}
+
+\CommentTok{\# Standard deviation of Y (length of stay)}
+\NormalTok{s\_y }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(senic}\SpecialCharTok{$}\NormalTok{length)}
+\NormalTok{s\_y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.911456
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# computing SST}
+
+\CommentTok{\# Total Sum of Squares (SST)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(senic)}
+\NormalTok{SST }\OtherTok{\textless{}{-}}\NormalTok{ (n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ s\_y}\SpecialCharTok{\^{}}\DecValTok{2}
+\NormalTok{SST}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 409.2104
+\end{verbatim}
+
+\end{document}

@@ -2,14 +2,10 @@
 title: "HW1"
 author: "Kwabena Bayity"
 output:
-  pdf_document: default
-  word_document: default
   html_document: default
 ---
 
 ```{r message=FALSE}
-# Load Data
-
 # Load necessary libraries
 library(readr)
 library(dplyr)
@@ -112,18 +108,15 @@ list(
 )
 ```
 
-
-
-
 # I already have:
 
-    b1b1​: the slope
+    b1: the slope
 
     SSE: sum of squared errors
 
     MSE: mean squared error
 
-    ∑(Xi−Xˉ)2∑(Xi​−Xˉ)2: the denominator used in slope calculation
+    ∑(Xi−Xˉ)2: the denominator used in slope calculation
     
     
 # Question 2:
@@ -159,23 +152,12 @@ list(
 )
 ```
 
-
-# Question 3
-
-10) perform a hypothesis test on the linear impact of X on Y, with a T test with a significant value of 0.1. 
-Note:
-	if a question doesn’t specify the hypothesized value, it is two-sided test against 0.
+# Question 3: 
+ 
+Perform a hypothesis test on the linear impact of X on Y, with a T test with a significant value of 0.1. 
+Note: if a question doesn’t specify the hypothesized value, it is two-sided test against 0.
 	All hypothesis problem should include the following component: Ho/Ha defined in symbols (β,μ etc.), test statistic (notation and formulas), reject region defined on a critical value (p-value computed on a probability formula), and conclusion.  
-
-
-# Define Hypotheses
-H0:β1=0 
-HA:β1≠0
-
-
-# R Code to Compute t-Statistic and p-value
-
-
+	
 ```{r}
 # Given values
 b1 <- 0.305
@@ -210,18 +192,17 @@ if (reject_H0) {
 }
 ```
 
-# Defion of terms for the question 3
+# Exaplannation of answers
 
 Output Explanation
 
-    t_stat — your test statistic.
+    t_stat — test statistic.
 
-    p_value — tells how likely your observed value is under the null.
+    p_value — tells how likely the observed value is under the null.
 
     t_crit — cutoff point for rejecting H₀ at α = 0.1.
 
-    reject_H0 — TRUE if the result is statistically significant.
-    
+   Decision Rule:  reject_H0 — TRUE if the result is statistically significant. THis means that infection risk has no linear impact on length of stay at the 0.1 significance level.
     
     
 # Question 4: Using R to compute and interpret questions using the simple linear regression (SLR) model:
@@ -235,7 +216,8 @@ Output Explanation
 
 ```{r}
 
-# Load data
+
+# Question 4 # Load data
 senic <- read.csv("/Users/kwabenabayity/Desktop/MY Purdue/Summer 2025/STATS/Scripts/senic.csv")
 
 # Build simple linear regression model
